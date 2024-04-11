@@ -36,6 +36,8 @@ export const CompanyCard = ({
 					});
 				}
 			);
+
+			queryClient.invalidateQueries({ queryKey: ["fetch-starred-companies"] });
 		},
 	});
 
@@ -60,7 +62,7 @@ export const CompanyCard = ({
 			style={{
 				cursor: "pointer",
 				border: "1px solid black",
-				marginBottom: "16px",
+				marginTop: "16px",
 			}}
 		>
 			<img
