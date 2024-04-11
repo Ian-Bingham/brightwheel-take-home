@@ -1,21 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
 import { CompanyList } from "./components/CompanyList";
+import { ChangeEvent, useState } from "react";
 
 export const SearchCompaniesShell = () => {
-	const { isPending, isError, data } = useQuery({
-		queryKey: ["search-companies"],
-		queryFn: async () => {
-			const resp = await fetch(
-				"http://localhost:3001/search?_page=1&_limit=10"
-			);
-			const data = await resp.json();
+	const [search, setSearch] = useState("");
 
-			return data;
-		},
-	});
+	const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value);
+	};
 
-	if (isPending) return <p>Loading...</p>;
-	if (isError) return <p>Error...</p>;
-
-	return <CompanyList companies={data} />;
+	return (
+		<>
+			<input
+				style={{ width: "100%" }}
+				type="search"
+				placeholder="Search for a company..."
+				value={search}
+				onChange={handleSearchChange}
+			/>
+			<CompanyList search={search} />
+		</>
+	);
 };
