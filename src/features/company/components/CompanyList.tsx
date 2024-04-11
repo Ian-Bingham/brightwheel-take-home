@@ -27,7 +27,7 @@ export const CompanyList = ({ search }: { search: string }) => {
 	return (
 		<>
 			{data.map((company) => (
-				<CompanyCard key={company.id} company={company} />
+				<CompanyCard key={company.id} company={company} search={search} />
 			))}
 		</>
 	);
