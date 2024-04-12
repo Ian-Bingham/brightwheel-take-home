@@ -4,6 +4,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Badge from "@mui/material/Badge";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
+import { useDebounce } from "@uidotdev/usehooks";
 
 import { CompanyList } from "./components/CompanyList";
 import { ChangeEvent, useState } from "react";
@@ -12,6 +13,8 @@ import "./SearchCompaniesShell.styles.css";
 
 export const SearchCompaniesShell = () => {
 	const [search, setSearch] = useState("");
+	const debouncedSearchTerm = useDebounce(search, 300);
+
 	const { isFetching, isError, data } = useQuery({
 		queryKey: ["fetch-starred-companies"],
 		queryFn: async () => {
@@ -60,7 +63,7 @@ export const SearchCompaniesShell = () => {
 			</header>
 
 			<main>
-				<CompanyList search={search} />
+				<CompanyList search={debouncedSearchTerm} />
 			</main>
 		</>
 	);
