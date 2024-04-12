@@ -1,4 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 
 import { CompanyCard } from "./CompanyCard";
 import { fetchCompanies } from "../services/companies.services";
@@ -21,9 +24,16 @@ export const CompanyList = ({ search }: { search: string }) => {
 		},
 	});
 
-	if (isPending) return <p>Loading...</p>;
-	if (isError) return <p>Error...</p>;
-	if (!data.length) return <p>No results found</p>;
+	if (isPending) return <CircularProgress />;
+
+	if (isError)
+		return (
+			<Alert severity="error">
+				An error occured during search. Please try again.
+			</Alert>
+		);
+
+	if (!data.length) return <Typography>No results found</Typography>;
 
 	return (
 		<ul className="company-list">

@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 
 import NoImage from "../../../assets/NoImage.avif";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -20,7 +22,7 @@ export const CompanyCard = ({
 }) => {
 	const queryClient = useQueryClient();
 
-	const { mutate } = useMutation({
+	const { mutate, isPending, isError } = useMutation({
 		mutationKey: ["update-company"],
 		mutationFn: ({
 			id,
@@ -57,6 +59,27 @@ export const CompanyCard = ({
 		mutate({ id: company.id, updates });
 	};
 
+	const getStar = () => {
+		if (isPending) {
+			return <CircularProgress />;
+		}
+
+		return (
+			<StarIcon
+				sx={{
+					color: company.starred ? "gold" : "#d8d8d8",
+				}}
+			/>
+		);
+	};
+
+	if (isError)
+		return (
+			<Alert severity="error">
+				An error occured during update. Please try again.
+			</Alert>
+		);
+
 	return (
 		<Card
 			raised
@@ -68,14 +91,9 @@ export const CompanyCard = ({
 				cursor: "pointer",
 			}}
 		>
-			<StarIcon
-				sx={{
-					color: company.starred ? "gold" : "#d8d8d8",
-					position: "absolute",
-					right: "0.3rem",
-					top: "0.2rem",
-				}}
-			/>
+			<div style={{ position: "absolute", right: "0.3rem", top: "0.2rem" }}>
+				{getStar()}
+			</div>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe">
