@@ -25,7 +25,7 @@ export const CompanyList = ({ search }: { search: string }) => {
 		},
 	});
 
-	if (isPending) return <CircularProgress />;
+	if (isPending) return <CircularProgress data-cy="search-results-loader" />;
 
 	if (isError)
 		return (

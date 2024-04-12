@@ -71,6 +71,9 @@ export const CompanyCard = ({
 				sx={{
 					color: company.starred ? "gold" : "#d8d8d8",
 				}}
+				data-cy={`company-card-star-icon-${
+					company.starred ? "filled" : "empty"
+				}`}
 			/>
 		);
 	};
@@ -92,6 +95,7 @@ export const CompanyCard = ({
 				position: "relative",
 				cursor: "pointer",
 			}}
+			data-cy="company-card-container"
 		>
 			<div className={css.starIconContainer}>{getStar()}</div>
 			<CardHeader

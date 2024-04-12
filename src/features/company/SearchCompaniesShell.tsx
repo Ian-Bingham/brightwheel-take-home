@@ -33,11 +33,15 @@ export const SearchCompaniesShell = () => {
 
 	const getStarCount = () => {
 		if (isFetching) {
-			return <CircularProgress />;
+			return <CircularProgress data-cy="total-stars-badge-loader" />;
 		}
 
 		return (
-			<Badge badgeContent={data?.length || "0"} color="primary">
+			<Badge
+				badgeContent={data?.length || "0"}
+				color="primary"
+				data-cy="total-stars-badge"
+			>
 				<StarIcon sx={{ color: "gold" }} fontSize="large" />
 			</Badge>
 		);
@@ -59,6 +63,7 @@ export const SearchCompaniesShell = () => {
 					variant="standard"
 					onChange={handleSearchChange}
 					sx={{ width: 0.95, marginRight: "12px" }}
+					data-cy="search-input"
 				/>
 				{getStarCount()}
 			</header>
