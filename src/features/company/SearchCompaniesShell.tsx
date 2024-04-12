@@ -9,7 +9,8 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { CompanyList } from "./components/CompanyList";
 import { ChangeEvent, useState } from "react";
 import { fetchCompanies } from "./services/companies.services";
-import "./SearchCompaniesShell.styles.css";
+
+import css from "./SearchCompaniesShell.module.css";
 
 export const SearchCompaniesShell = () => {
 	const [search, setSearch] = useState("");
@@ -51,7 +52,7 @@ export const SearchCompaniesShell = () => {
 
 	return (
 		<>
-			<header>
+			<header className={css.searchHeader}>
 				<TextField
 					label="Search for companies..."
 					type="search"
@@ -62,7 +63,7 @@ export const SearchCompaniesShell = () => {
 				{getStarCount()}
 			</header>
 
-			<main>
+			<main className={css.mainContent}>
 				<CompanyList search={debouncedSearchTerm} />
 			</main>
 		</>

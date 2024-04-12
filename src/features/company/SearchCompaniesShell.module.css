@@ -1,10 +1,10 @@
-header {
+.searchHeader {
 	display: flex;
 	align-items: flex-end;
 
 	margin-bottom: 32px;
 }
 
-main {
+.mainContent {
 	margin-top: 16px;
 }

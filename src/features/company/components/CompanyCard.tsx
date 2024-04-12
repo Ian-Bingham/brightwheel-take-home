@@ -13,6 +13,8 @@ import NoImage from "../../../assets/NoImage.avif";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateCompany } from "../services/companies.services";
 
+import css from "./CompanyCard.module.css";
+
 export const CompanyCard = ({
 	company,
 	search,
@@ -91,9 +93,7 @@ export const CompanyCard = ({
 				cursor: "pointer",
 			}}
 		>
-			<div style={{ position: "absolute", right: "0.3rem", top: "0.2rem" }}>
-				{getStar()}
-			</div>
+			<div className={css.starIconContainer}>{getStar()}</div>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe">
