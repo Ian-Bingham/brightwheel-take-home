@@ -1,4 +1,3 @@
-import { Company } from "../types/company.interface";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -8,10 +7,11 @@ import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
-
-import NoImage from "../../../assets/NoImage.avif";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateCompany } from "../services/companies.services";
+
+import { Company } from "../../types/company.interface";
+import { updateCompany } from "../../services/companies.services";
+import NoImage from "../../../../assets/NoImage.avif";
 
 import css from "./CompanyCard.module.css";
 

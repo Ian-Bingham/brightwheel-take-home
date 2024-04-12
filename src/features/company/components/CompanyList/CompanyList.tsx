@@ -3,8 +3,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 
-import { CompanyCard } from "./CompanyCard";
-import { fetchCompanies } from "../services/companies.services";
+import { CompanyCard } from "../CompanyCard/CompanyCard";
+import { fetchCompanies } from "../../services/companies.services";
 
 import css from "./CompanyList.module.css";
 

@@ -6,7 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { useDebounce } from "@uidotdev/usehooks";
 
-import { CompanyList } from "./components/CompanyList";
+import { CompanyList } from "./components/CompanyList/CompanyList";
 import { ChangeEvent, useState } from "react";
 import { fetchCompanies } from "./services/companies.services";
 
