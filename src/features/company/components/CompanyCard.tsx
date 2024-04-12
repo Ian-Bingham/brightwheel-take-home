@@ -1,4 +1,12 @@
 import { Company } from "../types/company.interface";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CardHeader from "@mui/material/CardHeader";
+import Avatar from "@mui/material/Avatar";
+import StarIcon from "@mui/icons-material/Star";
+
 import NoImage from "../../../assets/NoImage.avif";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateCompany } from "../services/companies.services";
@@ -12,7 +20,7 @@ export const CompanyCard = ({
 }) => {
 	const queryClient = useQueryClient();
 
-	const { mutate, isPending, isError } = useMutation({
+	const { mutate } = useMutation({
 		mutationKey: ["update-company"],
 		mutationFn: ({
 			id,
@@ -49,32 +57,52 @@ export const CompanyCard = ({
 		mutate({ id: company.id, updates });
 	};
 
-	const getStarred = () => {
-		if (isPending) return "Loading...";
-		if (isError) return "An error occured. Please try again";
-
-		return `${company.starred}`;
-	};
-
 	return (
-		<div
+		<Card
+			raised
 			onClick={handleClick}
-			style={{
+			sx={{
+				marginBottom: "16px",
+				height: "100%",
+				position: "relative",
 				cursor: "pointer",
-				border: "1px solid black",
-				marginTop: "16px",
 			}}
 		>
-			<img
-				src={company.image || NoImage}
-				alt="Profile picture of company"
-				width="200px"
-				height="200px"
+			<StarIcon
+				sx={{
+					color: company.starred ? "gold" : "#d8d8d8",
+					position: "absolute",
+					right: "0.3rem",
+					top: "0.2rem",
+				}}
 			/>
-			<p>Name: {company.name}</p>
-			<p>Description: {company.description}</p>
-			<p>Address: {company.address.address1}</p>
-			<p>Starred: {getStarred()}</p>
-		</div>
+			<CardHeader
+				avatar={
+					<Avatar aria-label="recipe">
+						<CardMedia
+							component="img"
+							image={company.image || NoImage}
+							title="Profile picture of company"
+						/>
+					</Avatar>
+				}
+				title={company.name}
+				subheader={company.description}
+			/>
+
+			<CardContent>
+				<Typography
+					color="text.secondary"
+					sx={{ display: "flex", flexDirection: "column" }}
+				>
+					<span>{company.address.address1}</span>
+					<span>{company.address.address2}</span>
+					<span>
+						{company.address.city}, {company.address.postalCode}{" "}
+						{company.address.state}
+					</span>
+				</Typography>
+			</CardContent>
+		</Card>
 	);
 };

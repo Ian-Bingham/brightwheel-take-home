@@ -16,6 +16,11 @@
     "start:mock": "run-p dev start:api"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.12",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
     "@tanstack/react-query": "^5.29.0",
     "@tanstack/react-query-devtools": "^5.29.0",
     "react": "^18.2.0",
