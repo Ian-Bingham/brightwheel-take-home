@@ -64,18 +64,30 @@ describe("Company Search", () => {
 		cy.visit("/");
 		waitForInitialUI();
 
-		cy.get('[data-cy="company-card-star-icon-filled"]').should(
-			"have.length",
-			0
-		);
+		cy.get('[data-cy="total-stars-badge"]').within(() => {
+			cy.get(".MuiBadge-badge").contains(3);
+		});
 
 		cy.get('[data-cy="company-card-container"').first().as("firstCompany");
+		cy.get("@firstCompany").within(() => {
+			cy.get('[data-cy="company-card-star-icon-filled"]').should(
+				"have.length",
+				0
+			);
+		});
+
 		cy.get("@firstCompany").click();
 		cy.wait("@getPatchedCompany");
 
-		cy.get('[data-cy="company-card-star-icon-filled"]').should(
-			"have.length",
-			1
-		);
+		cy.get("@firstCompany").within(() => {
+			cy.get('[data-cy="company-card-star-icon-filled"]').should(
+				"have.length",
+				1
+			);
+		});
+
+		cy.get('[data-cy="total-stars-badge"]').within(() => {
+			cy.get(".MuiBadge-badge").contains(4);
+		});
 	});
 });

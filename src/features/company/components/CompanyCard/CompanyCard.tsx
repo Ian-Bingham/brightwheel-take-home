@@ -49,7 +49,18 @@ export const CompanyCard = ({
 				}
 			);
 
-			queryClient.invalidateQueries({ queryKey: ["fetch-starred-companies"] });
+			queryClient.setQueryData(
+				["fetch-starred-companies"],
+				(currentStarredCompanies: Company[]) => {
+					if (!data.starred) {
+						return currentStarredCompanies.filter(
+							(currentStarredCompany) => currentStarredCompany.id !== data.id
+						);
+					}
+
+					return [...currentStarredCompanies, data];
+				}
+			);
 		},
 	});
 

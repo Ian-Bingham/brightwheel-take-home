@@ -16,7 +16,7 @@ export const SearchCompaniesShell = () => {
 	const [search, setSearch] = useState("");
 	const debouncedSearchTerm = useDebounce(search, 300);
 
-	const { isFetching, isError, data } = useQuery({
+	const { isPending, isError, data } = useQuery({
 		queryKey: ["fetch-starred-companies"],
 		queryFn: async () => {
 			const params = {
@@ -32,7 +32,7 @@ export const SearchCompaniesShell = () => {
 	};
 
 	const getStarCount = () => {
-		if (isFetching) {
+		if (isPending) {
 			return <CircularProgress data-cy="total-stars-badge-loader" />;
 		}
 
