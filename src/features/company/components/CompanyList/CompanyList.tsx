@@ -12,7 +12,7 @@ const CURRENT_PAGE = 1;
 const SEARCH_LIMIT = 10;
 
 export const CompanyList = ({ search }: { search: string }) => {
-	const { isPending, isError, data } = useQuery({
+	const { isPending, isError, error, data } = useQuery({
 		queryKey: ["search-companies", search],
 		queryFn: async () => {
 			const params = {
@@ -27,12 +27,15 @@ export const CompanyList = ({ search }: { search: string }) => {
 
 	if (isPending) return <CircularProgress data-cy="search-results-loader" />;
 
-	if (isError)
+	if (isError) {
+		console.error(error);
+
 		return (
 			<Alert severity="error">
 				An error occured during search. Please try again.
 			</Alert>
 		);
+	}
 
 	if (!data.length) return <Typography>No results found</Typography>;
 

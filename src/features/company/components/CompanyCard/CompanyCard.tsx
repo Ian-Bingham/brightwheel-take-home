@@ -24,7 +24,7 @@ export const CompanyCard = ({
 }) => {
 	const queryClient = useQueryClient();
 
-	const { mutate, isPending, isError } = useMutation({
+	const { mutate, isPending, isError, error } = useMutation({
 		mutationKey: ["update-company"],
 		mutationFn: ({
 			id,
@@ -89,12 +89,15 @@ export const CompanyCard = ({
 		);
 	};
 
-	if (isError)
+	if (isError) {
+		console.error(error);
+
 		return (
 			<Alert severity="error">
 				An error occured during update. Please try again.
 			</Alert>
 		);
+	}
 
 	return (
 		<Card

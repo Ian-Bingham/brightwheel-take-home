@@ -16,7 +16,7 @@ export const SearchCompaniesShell = () => {
 	const [search, setSearch] = useState("");
 	const debouncedSearchTerm = useDebounce(search, 300);
 
-	const { isPending, isError, data } = useQuery({
+	const { isPending, isError, error, data } = useQuery({
 		queryKey: ["fetch-starred-companies"],
 		queryFn: async () => {
 			const params = {
@@ -47,12 +47,15 @@ export const SearchCompaniesShell = () => {
 		);
 	};
 
-	if (isError)
+	if (isError) {
+		console.error(error);
+
 		return (
 			<Alert severity="error">
 				An error occured fetching stars. Please try again.
 			</Alert>
 		);
+	}
 
 	return (
 		<>
