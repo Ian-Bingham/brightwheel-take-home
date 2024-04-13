@@ -1,0 +1,10 @@
+.searchHeader {
+	display: flex;
+	align-items: flex-end;
+
+	margin-bottom: 32px;
+}
+
+.mainContent {
+	margin-top: 16px;
+}
