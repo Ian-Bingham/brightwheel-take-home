@@ -25,6 +25,10 @@ Given that this is a take home assignment there are a few things that I want to 
    a. Currently, to get the total number of starred companies, we are fetching all companies that are starred and obtaining the length of that result to display in the Star badge. We may want to consider creating a separate endpoint to return the total star count as we do not need the Company information to support the Star badge.
 4. Filtering Companies Based Off Relevant Information
    a. Currently, the "q" filter for the API filters off of all fields including the Company image url. We may want to consider updating the filter to remove irrelevant search properties, such as the image url, as I don't believe a user would attempt to search for a result based off the contents of a url.
+5. Add Proper Logging
+   a. Currently, we are leveraging console.error() to note any errors that happen within the application. It may be beneficial to leverage a service, such as Datadog, to capture these errors.
+6. Enhance Error Messages
+   a. Currently, we are showing a generic, inline error alert when an error occurs. We may want to consider using Toast notifications, as well as different verbiage for each error message, to enhance user experience.
 
 ## Project Description
 
